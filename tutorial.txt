@@ -1,0 +1,28 @@
+para crear entorno virutal:
+py -m venv  (nombre que quiero elegir)
+
+Para ejecutar los siguientes script hay que estar dentro de la carpeta del entrono:
+para activar:
+Scripts\activate
+
+descativar: 
+deactivate
+
+Para activar el modo DEBUG:
+flask --app (nombre de la app) --debug run
+
+Para ejecturar la aplicacion creada:
+flask --app (nombre de la app) run
+
+    *No llamar "flask" al archivo, sino no anda*
+
+
+Para renderizar el HTML se debe crear la carpeta "templates", importante que sea con ese nombre para que asi lo tome bien el script. y luego en donde se importa flask, importar "render_template". luego en la funcion que retorna el html se pone render_template('ruta del archivo')
+
+Para crear bloques de contenido se usa:
+{{%block (nombre del contenido)%}} {{%% endblock}}
+
+FILTROS y FUNCIONES
+*Existen filtros propios de flask. Los mismos se colocan luego de la variable en el html seguidos de "|" 
+
+*Tambien se pueden crear filtros, los mismos se hacen en formato de funciones de pyhon pero en la linea de arriba de la funcion se debe sumar a la app de flask con "@app.add_template_filter()"
