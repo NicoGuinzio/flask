@@ -1,15 +1,31 @@
 from flask import Flask,render_template
 from markupsafe import escape
-
+from datetime import datetime
 app = Flask(__name__)
 app.debug = True
+
+# filtros personaliados
+@app.add_template_filter
+def today(date):
+    return date.strftime('%d-%m-%Y')
+
+# esta es otra forma, primero se pone app sin arroba, luego el nombre de la funcion y luego como se la llama 
+# app.add_template_filter(today, 'today')
+
 
 @app.route('/')
 @app.route('/index')
 def index():
-    name = None
+    name = 'Nico'
     friends = ['Nico','Euge','Sofi','Andalucia','Joaco']
-    return render_template('index.html',name = name, friends = friends)
+    date = datetime.now()
+    return render_template(
+        'index.html',
+        name = name,
+        friends = friends,
+        date = date
+    )
+
 @app.route('/hello')
 @app.route('/hello/<name>')
 @app.route('/hello/<name>/<int:age>')
@@ -25,6 +41,3 @@ def hello(name = None, age= None):
 def code(code):
     return f'<code>{escape(code)}</code>'
 
-
-if __name__ == "__main__":
-    app.run()
