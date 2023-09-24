@@ -43,6 +43,36 @@ Para crear bloques de contenido en tus plantillas HTML, utiliza la siguiente sin
 
 ## Filtros y Funciones
 
-Puedes utilizar filtros propios de Flask en tus plantillas HTML agregándolos después de la variable, separados por `|`.
+--> Puedes utilizar filtros propios de Flask en tus plantillas HTML agregándolos después de la variable, separados por `|`.
 
-También puedes crear tus propios filtros siguiendo el formato de funciones de Python y utilizando `@app.add_template_filter()` en la línea superior de la función.
+--> También puedes crear tus propios filtros siguiendo el formato de funciones de Python y utilizando "@app.add_template_filter()" en la línea superior de la función.
+
+# Funciones personalizadas
+Las misma se crean en el code de la app python:
+--> LLamado 1: se las llama dentro de la ruta en donde se quiera agregar y luego se la inserta en el html entre {{}} (llaves dobles) 
+
+--> LLmado 2: se lo agrega en una funcion decoradora global "@app.add_template_global" o @app.add_template_global(repeat, 'repeat')
+
+
+## Envio de datos
+Para el envio de datos, lo que se hace es trabajar un un diccionario de python para luego poder llamarlo por su nombre dentro del html y la logia se ubica tambien dentro del html
+Codigo python>>
+    @app.route('/hello/<name>/<int:age>/<email>')
+    def hello(name = None, age= None, email=None):
+        my_data = {
+            'name' : name,
+            'age': age,
+            'email' : email
+        }
+Codigo html>>
+      <h2> Mis datos</h2>
+        <ul>
+            <li>Nombre: {{data.name}}</li>
+            <li>Edad: {{data.age}}</li>   
+            <li>Email: {{data.email}}</li>
+        </ul>
+
+## Enlaces y reutas
+Para navegar entre las paginas, se fabrican rutas, para crear estas se usa la funcion url_for que se debe importar desde flask.
+La funcion url_for se agrega debajo de las funciones creadas para la app. ej: index.
+Luego se las llama en el html. ej: <li><a href="{{ url_for('index') }}">Inicio</a></li>

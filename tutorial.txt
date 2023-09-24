@@ -26,3 +26,5 @@ FILTROS y FUNCIONES
 *Existen filtros propios de flask. Los mismos se colocan luego de la variable en el html seguidos de "|" 
 
 *Tambien se pueden crear filtros, los mismos se hacen en formato de funciones de pyhon pero en la linea de arriba de la funcion se debe sumar a la app de flask con "@app.add_template_filter()"
+
+FUNCIONES PERSONALIZADAS

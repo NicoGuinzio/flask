@@ -1,4 +1,4 @@
-from flask import Flask,render_template
+from flask import Flask,render_template,url_for
 from markupsafe import escape
 from datetime import datetime
 app = Flask(__name__)
@@ -13,9 +13,20 @@ def today(date):
 # app.add_template_filter(today, 'today')
 
 
+#Funcion personalizada
+@app.add_template_global
+def repeat(string,numero):
+    return string*numero
+
+
+# @app.add_template_global(repeat, 'repeat')
+
 @app.route('/')
 @app.route('/index')
 def index():
+    print(url_for('index'))
+    print(url_for('hello', name = 'Alex', age = '27'))
+    print(url_for('code', code ='print("hola")'))
     name = 'Nico'
     friends = ['Nico','Euge','Sofi','Andalucia','Joaco']
     date = datetime.now()
@@ -23,19 +34,21 @@ def index():
         'index.html',
         name = name,
         friends = friends,
-        date = date
+        date = date,
     )
 
 @app.route('/hello')
 @app.route('/hello/<name>')
-@app.route('/hello/<name>/<int:age>')
-def hello(name = None, age= None):
-    if name == None and age == None:
-        return '<h1> Hola Mundo! </h1>'
-    elif age == None:
-        return f'<h1>Hola,{name}!</h1>'
-    else:
-        return f'<h1>Hola,{name} el doble de tu edad es {age*2}!</h1>'
+@app.route('/hello/<name>/<age>')
+@app.route('/hello/<name>/<int:age>/<email>')
+def hello(name = None, age= None, email=None):
+    my_data = {
+        'name' : name,
+        'age': age,
+        'email' : email
+    }
+    
+    return render_template('hello.html', data = my_data)
 
 @app.route('/code/<path:code>')
 def code(code):
