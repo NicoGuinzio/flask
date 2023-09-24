@@ -65,14 +65,14 @@ Codigo python>>
             'email' : email
         }
 Codigo html>>
-      <h2> Mis datos</h2>
-        <ul>
-            <li>Nombre: {{data.name}}</li>
-            <li>Edad: {{data.age}}</li>   
-            <li>Email: {{data.email}}</li>
-        </ul>
+        h2  Mis datos/h2 
+        ul 
+            li Nombre: {{data.name}}/li 
+            li Edad: {{data.age}}/li    
+            li Email: {{data.email}}/li 
+        /ul 
 
 ## Enlaces y reutas
 Para navegar entre las paginas, se fabrican rutas, para crear estas se usa la funcion url_for que se debe importar desde flask.
 La funcion url_for se agrega debajo de las funciones creadas para la app. ej: index.
-Luego se las llama en el html. ej: <li><a href="{{ url_for('index') }}">Inicio</a></li>
+Luego se las llama en el html. ej: href="{{ url_for('index') }}"
